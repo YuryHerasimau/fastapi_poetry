@@ -1,0 +1,39 @@
+virtualenv env
+source env/Scripts/activate
+
+python -m pip install pip --upgrade
+
+pip install poetry
+poetry config --list
+poetry config virtualenvs.in-project true
+
+poetry shell
+poetry new fastapi_poetry
+cd fastapi_poetry
+poetry shell
+cat pyproject.toml
+# poetry init
+
+poetry add uvicorn
+poetry run uvicorn fastapi_poetry.main:app --reload --port 8000
+# set MAIN_URL=/
+export MAIN_URL=/
+poetry run uvicorn fastapi_poetry.main:app --reload --port 8000
+export MAIN_URL=/status
+poetry run uvicorn fastapi_poetry.main:app --reload --port 8000
+  
+poetry add pytest --group test
+poetry add httpx --group test
+poetry install
+poetry install --without test
+poetry run pytest
+
+poetry add mypy --group test
+poetry run mypy ./
+
+poetry add pylint --group test
+poetry run pylint ./fastapi_poetry
+
+docker build . --tag fastapi
+# docker run -p 8000:8000 --env MAIN_URL=/status fastapi
+docker run -p 8000:8000 fastapi
