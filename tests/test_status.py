@@ -1,6 +1,5 @@
 from fastapi.testclient import TestClient
 from fastapi_poetry.main import app
-# from fastapi_poetry.settings import settings
 
 
 def test_answer():

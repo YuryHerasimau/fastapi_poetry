@@ -3,7 +3,6 @@
 """
 from fastapi import FastAPI
 from pydantic import BaseModel
-# from .settings import settings
 
 app = FastAPI()
 
